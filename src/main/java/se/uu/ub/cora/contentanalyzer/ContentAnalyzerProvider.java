@@ -1,6 +1,6 @@
 package se.uu.ub.cora.contentanalyzer;
 /*
- * Copyright 2022, 2023 Uppsala University Library
+ * Copyright 2023 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -22,17 +22,17 @@ import se.uu.ub.cora.initialize.AbstractProvider;
 import se.uu.ub.cora.initialize.SelectOrder;
 
 /**
- * ContentAnalyzerProvider is used to provide access to archive for resources.
+ * ContentAnalyzerProvider is used to provide access to content analyzer for binaries.
  * </p>
  * Implementing {@link ContentAnalyzerInstanceProvider}s are found using javas module system, and
- * the one with the higest {@link SelectOrder} is used to provide access to resource archive.
+ * the one with the higest {@link SelectOrder} is used to provide access to content analyzing.
  */
 public class ContentAnalyzerProvider extends AbstractProvider {
 	private static ContentAnalyzerInstanceProvider instanceProvider;
 
 	/**
 	 * getContentAnalyzer returns a ContentAnalyzer that can be used by anything that needs access
-	 * to resources.
+	 * to Content Analyzer.
 	 * </p>
 	 * Code using the returned {@link ContentAnalyzer} instance MUST consider the returned instance
 	 * as NOT thread safe.
@@ -52,10 +52,10 @@ public class ContentAnalyzerProvider extends AbstractProvider {
 	}
 
 	/**
-	 * onlyForTestSetInstanceProvider sets a ContentAnalyzerInstanceProvider that will be used to
+	 * onlyForTestSetContentAnalyzer sets a ContentAnalyzerInstanceProvider that will be used to
 	 * return instances for the {@link #getContentAnalyzer()} method. This possibility to set a
-	 * DataRecordFactory is provided to enable testing of getting a record storage in other classes
-	 * and is not intented to be used in production.
+	 * ContentAnalyzerInstanceProvider is provided to enable testing of getting a Content Analyzer
+	 * in other classes and is not intented to be used in production.
 	 * <p>
 	 * The ContentAnalyzerInstanceProvider to use in production should be provided through an
 	 * implementation of {@link ContentAnalyzerInstanceProvider} in a seperate java module.
@@ -64,7 +64,7 @@ public class ContentAnalyzerProvider extends AbstractProvider {
 	 *            A ContentAnalyzerInstanceProvider to use to return ContentAnalyzer instances for
 	 *            testing
 	 */
-	public static void onlyForTestSetInstanceProvider(
+	public static void onlyForTestSetContentAnalyzer(
 			ContentAnalyzerInstanceProvider instanceProvider) {
 		ContentAnalyzerProvider.instanceProvider = instanceProvider;
 	}
