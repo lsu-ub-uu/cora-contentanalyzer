@@ -4,6 +4,7 @@
  * system.
  */
 module se.uu.ub.cora.contentanalyzer {
+	requires se.uu.ub.cora.initialize;
 	// requires se.uu.ub.cora.storage;
 	// requires se.uu.ub.cora.initialize;
 	// requires se.uu.ub.cora.fedora;
