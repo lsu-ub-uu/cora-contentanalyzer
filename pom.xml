@@ -31,9 +31,11 @@
 	<name>Content Analyzer</name>
 
 	<properties>
-		<initialize.version>1.4.0</initialize.version>
+		<initialize.version>1.5-SNAPSHOT</initialize.version>
+		<initialize-spies.version>1.4.0</initialize-spies.version>
 		<logger.version>2.9.0</logger.version>
-
+		<logger-spies.version>1.4.0</logger-spies.version>
+		
 		<!--		<storage.version>9.0-SNAPSHOT</storage.version>-->
 		<!--		<fedora.version>4.0-SNAPSHOT</fedora.version>-->
 		<!--		<coradata.version>7.7.0</coradata.version>-->
@@ -59,9 +61,21 @@
 		</dependency>
 		<dependency>
 			<groupId>se.uu.ub.cora</groupId>
+			<artifactId>initialize-spies</artifactId>
+			<version>${initialize-spies.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>se.uu.ub.cora</groupId>
 			<artifactId>logger</artifactId>
 			<version>${logger.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>se.uu.ub.cora</groupId>
+			<artifactId>logger-spies</artifactId>
+			<version>${logger-spies.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>

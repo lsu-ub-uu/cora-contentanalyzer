@@ -30,6 +30,11 @@ import se.uu.ub.cora.initialize.SelectOrder;
 public class ContentAnalyzerProvider extends AbstractProvider {
 	private static ContentAnalyzerInstanceProvider instanceProvider;
 
+	private ContentAnalyzerProvider() {
+		// prevent call to constructor
+		throw new UnsupportedOperationException();
+	}
+
 	/**
 	 * getContentAnalyzer returns a ContentAnalyzer that can be used by anything that needs access
 	 * to Content Analyzer.
@@ -52,10 +57,10 @@ public class ContentAnalyzerProvider extends AbstractProvider {
 	}
 
 	/**
-	 * onlyForTestSetContentAnalyzer sets a ContentAnalyzerInstanceProvider that will be used to
-	 * return instances for the {@link #getContentAnalyzer()} method. This possibility to set a
-	 * ContentAnalyzerInstanceProvider is provided to enable testing of getting a Content Analyzer
-	 * in other classes and is not intented to be used in production.
+	 * onlyForTestSetContentAnalyzerInstanceProvider sets a ContentAnalyzerInstanceProvider that
+	 * will be used to return instances for the {@link #getContentAnalyzer()} method. This
+	 * possibility to set a ContentAnalyzerInstanceProvider is provided to enable testing of getting
+	 * a Content Analyzer in other classes and is not intented to be used in production.
 	 * <p>
 	 * The ContentAnalyzerInstanceProvider to use in production should be provided through an
 	 * implementation of {@link ContentAnalyzerInstanceProvider} in a seperate java module.
@@ -64,8 +69,9 @@ public class ContentAnalyzerProvider extends AbstractProvider {
 	 *            A ContentAnalyzerInstanceProvider to use to return ContentAnalyzer instances for
 	 *            testing
 	 */
-	public static void onlyForTestSetContentAnalyzer(
+	public static void onlyForTestSetContentAnalyzerInstanceProvider(
 			ContentAnalyzerInstanceProvider instanceProvider) {
 		ContentAnalyzerProvider.instanceProvider = instanceProvider;
 	}
+
 }
