@@ -18,4 +18,6 @@ module se.uu.ub.cora.contentanalyzer {
 	// provides se.uu.ub.cora.storage.archive.ResourceArchiveInstanceProvider
 	// with FedoraResourceArchiveProvider;
 
+	exports se.uu.ub.cora.contentanalyzer;
+
 }

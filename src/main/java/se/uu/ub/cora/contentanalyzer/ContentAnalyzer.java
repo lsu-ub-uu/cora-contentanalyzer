@@ -32,5 +32,4 @@ public interface ContentAnalyzer {
 	 * @return a String with the detected mimeType
 	 */
 	String getMimeType(InputStream resource);
-
 }

@@ -36,4 +36,5 @@ public interface ContentAnalyzerInstanceProvider extends SelectOrder {
 	 */
 
 	ContentAnalyzer getContentAnalyzer();
+
 }
