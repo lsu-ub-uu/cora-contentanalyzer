@@ -16,21 +16,29 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package se.uu.ub.cora.contentanalyzer;
 
-import java.io.InputStream;
+import static org.testng.Assert.assertEquals;
 
-public interface ContentAnalyzer {
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-	/**
-	 * getMimeType detects the mimetype of an InputStream.
-	 * <p>
-	 * If mimetype can not be detected a {@link ContentAnalyzerException} is thrown.
-	 * 
-	 * @param resource
-	 *            an InputStream to be analyzed
-	 * @return a String with the detected mimeType
-	 */
-	String getMimeType(InputStream resource);
+public class ContentAnalyzerExceptionTest {
+	@Test
+	public void testInit() {
+		ContentAnalyzerException conflict = ContentAnalyzerException.withMessage("message");
 
+		Assert.assertEquals(conflict.getMessage(), "message");
+	}
+
+	@Test
+	public void testInitWithException() {
+		Exception exception = new Exception();
+		ContentAnalyzerException conflict = ContentAnalyzerException
+				.withMessageAndException("message", exception);
+
+		assertEquals(conflict.getMessage(), "message");
+		assertEquals(conflict.getCause(), exception);
+	}
 }

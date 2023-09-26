@@ -16,21 +16,27 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package se.uu.ub.cora.contentanalyzer;
 
-import java.io.InputStream;
+public class ContentAnalyzerException extends RuntimeException {
 
-public interface ContentAnalyzer {
+	private static final long serialVersionUID = 2241064467145940402L;
 
-	/**
-	 * getMimeType detects the mimetype of an InputStream.
-	 * <p>
-	 * If mimetype can not be detected a {@link ContentAnalyzerException} is thrown.
-	 * 
-	 * @param resource
-	 *            an InputStream to be analyzed
-	 * @return a String with the detected mimeType
-	 */
-	String getMimeType(InputStream resource);
+	public static ContentAnalyzerException withMessage(String message) {
+		return new ContentAnalyzerException(message);
+	}
 
+	public static ContentAnalyzerException withMessageAndException(String message,
+			Exception exception) {
+		return new ContentAnalyzerException(message, exception);
+	}
+
+	private ContentAnalyzerException(String message) {
+		super(message);
+	}
+
+	private ContentAnalyzerException(String message, Exception exception) {
+		super(message, exception);
+	}
 }

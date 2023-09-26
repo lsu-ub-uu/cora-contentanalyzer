@@ -18,12 +18,14 @@
  */
 package se.uu.ub.cora.contentanalyzer;
 
+import java.io.InputStream;
+
 public class ContentAnalyzerSpy implements ContentAnalyzer {
 
 	@Override
-	public void analyze() {
+	public String getMimeType(InputStream resource) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 }
