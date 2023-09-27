@@ -27,5 +27,4 @@ public class ContentAnalyzerSpy implements ContentAnalyzer {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

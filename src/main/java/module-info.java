@@ -1,3 +1,4 @@
+import se.uu.ub.cora.contentanalyzer.ContentAnalyzerInstanceProvider;
 
 /**
  * The fedora module provides interfaces and classes to use a Fedora Commons System in a Cora based
@@ -17,6 +18,8 @@ module se.uu.ub.cora.contentanalyzer {
 	// FedoraRecordArchiveProvider;
 	// provides se.uu.ub.cora.storage.archive.ResourceArchiveInstanceProvider
 	// with FedoraResourceArchiveProvider;
+
+	uses ContentAnalyzerInstanceProvider;
 
 	exports se.uu.ub.cora.contentanalyzer;
 
