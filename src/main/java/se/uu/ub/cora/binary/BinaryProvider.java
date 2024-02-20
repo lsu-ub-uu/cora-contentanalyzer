@@ -1,6 +1,5 @@
-package se.uu.ub.cora.contentanalyzer;
 /*
- * Copyright 2023 Uppsala University Library
+ * Copyright 2023, 2024 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -17,7 +16,12 @@ package se.uu.ub.cora.contentanalyzer;
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
+package se.uu.ub.cora.binary;
 
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzerInstanceProvider;
+import se.uu.ub.cora.binary.iiif.IiifImageAdapter;
+import se.uu.ub.cora.binary.iiif.IiifImageInstanceProvider;
 import se.uu.ub.cora.initialize.AbstractProvider;
 import se.uu.ub.cora.initialize.SelectOrder;
 
@@ -27,10 +31,11 @@ import se.uu.ub.cora.initialize.SelectOrder;
  * Implementing {@link ContentAnalyzerInstanceProvider}s are found using javas module system, and
  * the one with the higest {@link SelectOrder} is used to provide access to content analyzing.
  */
-public class ContentAnalyzerProvider extends AbstractProvider {
-	private static ContentAnalyzerInstanceProvider instanceProvider;
+public class BinaryProvider extends AbstractProvider {
+	private static ContentAnalyzerInstanceProvider analyzerInstanceProvider;
+	private static IiifImageInstanceProvider imageInstanceProvider;
 
-	private ContentAnalyzerProvider() {
+	private BinaryProvider() {
 		// prevent call to constructor
 		throw new UnsupportedOperationException();
 	}
@@ -42,16 +47,16 @@ public class ContentAnalyzerProvider extends AbstractProvider {
 	 * Code using the returned {@link ContentAnalyzer} instance MUST consider the returned instance
 	 * as NOT thread safe.
 	 * 
-	 * @return A ContentAnalyzer that gives access to storage for resource
+	 * @return A ContentAnalyzer that gives access to check the mime type of a file
 	 */
 	public static synchronized ContentAnalyzer getContentAnalyzer() {
 		locateAndChooseInstanceProvider();
-		return instanceProvider.getContentAnalyzer();
+		return analyzerInstanceProvider.getContentAnalyzer();
 	}
 
 	private static void locateAndChooseInstanceProvider() {
-		if (instanceProvider == null) {
-			instanceProvider = moduleInitializer
+		if (analyzerInstanceProvider == null) {
+			analyzerInstanceProvider = moduleInitializer
 					.loadOneImplementationBySelectOrder(ContentAnalyzerInstanceProvider.class);
 		}
 	}
@@ -71,7 +76,42 @@ public class ContentAnalyzerProvider extends AbstractProvider {
 	 */
 	public static void onlyForTestSetContentAnalyzerInstanceProvider(
 			ContentAnalyzerInstanceProvider instanceProvider) {
-		ContentAnalyzerProvider.instanceProvider = instanceProvider;
+		BinaryProvider.analyzerInstanceProvider = instanceProvider;
+	}
+
+	/**
+	 * getIiifImageAdapter returns a IiifImageAdapter that can be used by anything that needs access
+	 * to Iiif Image API.
+	 * </p>
+	 * Code using the returned {@link IiifImageAdapter} instance MUST consider the returned instance
+	 * as NOT thread safe.
+	 * 
+	 * @return A IiifImageAdapter that gives access to IIIF Image Api
+	 */
+	public static IiifImageAdapter getIiifImageAdapter() {
+		if (imageInstanceProvider == null) {
+			imageInstanceProvider = moduleInitializer
+					.loadOneImplementationBySelectOrder(IiifImageInstanceProvider.class);
+		}
+		return imageInstanceProvider.getIiifImageAdapter();
+	}
+
+	/**
+	 * onlyForTestSetIiifImageAdapterInstanceProvider sets a IiifImageInstanceProvider that will be
+	 * used to return instances for the {@link #getIiifImageAdapter()} method. This possibility to
+	 * set a IiifImageInstanceProvider is provided to enable testing of getting a IiifImageAdapter
+	 * in other classes and is not intented to be used in production.
+	 * <p>
+	 * The IiifImageInstanceProvider to use in production should be provided through an
+	 * implementation of {@link IiifImageInstanceProvider} in a seperate java module.
+	 * 
+	 * @param instanceProvider
+	 *            A IiifImageInstanceProvider to use to return IiifImageAdapter instances for
+	 *            testing
+	 */
+	public static void onlyForTestSetIiifImageAdapterInstanceProvider(
+			IiifImageInstanceProvider imageInstanceProvider) {
+		BinaryProvider.imageInstanceProvider = imageInstanceProvider;
 	}
 
 }

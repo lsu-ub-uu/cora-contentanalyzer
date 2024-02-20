@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Uppsala University Library
+ * Copyright 2024 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -16,15 +16,9 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.contentanalyzer;
+package se.uu.ub.cora.binary.iiif;
 
-import java.io.InputStream;
+public record IiifImageParameters(String dataDivider, String identifier, String region, String size,
+		String rotation, String quality, String format) {
 
-public class ContentAnalyzerSpy implements ContentAnalyzer {
-
-	@Override
-	public String getMimeType(InputStream resource) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -1,6 +1,5 @@
-package se.uu.ub.cora.contentanalyzer;
 /*
- * Copyright 2023 Uppsala University Library
+ * Copyright 2024 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -18,12 +17,15 @@ package se.uu.ub.cora.contentanalyzer;
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package se.uu.ub.cora.binary.iiif;
+
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 import se.uu.ub.cora.initialize.SelectOrder;
 
 /**
  * ContentAnalyzerInstanceProvider is used to provide Content Analyzers for binaries
  */
-public interface ContentAnalyzerInstanceProvider extends SelectOrder {
+public interface IiifImageInstanceProvider extends SelectOrder {
 
 	/**
 	 * getContentAnalyzer should be implemented in such a way that it returns a
@@ -35,6 +37,6 @@ public interface ContentAnalyzerInstanceProvider extends SelectOrder {
 	 * @return A {@link ContentAnalyzer} that gives access to content analyzer for binaries
 	 */
 
-	ContentAnalyzer getContentAnalyzer();
+	IiifImageAdapter getIiifImageAdapter();
 
 }

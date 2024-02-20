@@ -17,26 +17,30 @@
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package se.uu.ub.cora.contentanalyzer;
+package se.uu.ub.cora.binary;
 
-public class ContentAnalyzerException extends RuntimeException {
+import static org.testng.Assert.assertEquals;
 
-	private static final long serialVersionUID = 2241064467145940402L;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-	public static ContentAnalyzerException withMessage(String message) {
-		return new ContentAnalyzerException(message);
+import se.uu.ub.cora.binary.BinaryException;
+
+public class BinaryExceptionTest {
+	@Test
+	public void testInit() {
+		BinaryException conflict = BinaryException.withMessage("message");
+
+		Assert.assertEquals(conflict.getMessage(), "message");
 	}
 
-	public static ContentAnalyzerException withMessageAndException(String message,
-			Exception exception) {
-		return new ContentAnalyzerException(message, exception);
-	}
+	@Test
+	public void testInitWithException() {
+		Exception exception = new Exception();
+		BinaryException conflict = BinaryException
+				.withMessageAndException("message", exception);
 
-	private ContentAnalyzerException(String message) {
-		super(message);
-	}
-
-	private ContentAnalyzerException(String message, Exception exception) {
-		super(message, exception);
+		assertEquals(conflict.getMessage(), "message");
+		assertEquals(conflict.getCause(), exception);
 	}
 }

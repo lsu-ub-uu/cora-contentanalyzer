@@ -16,16 +16,18 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.contentanalyzer;
+package se.uu.ub.cora.binary.contentanalyzer;
 
 import java.io.InputStream;
+
+import se.uu.ub.cora.binary.BinaryException;
 
 public interface ContentAnalyzer {
 
 	/**
 	 * getMimeType detects the mimetype of an InputStream.
 	 * <p>
-	 * If mimetype can not be detected a {@link ContentAnalyzerException} is thrown.
+	 * If mimetype can not be detected a {@link BinaryException} is thrown.
 	 * 
 	 * @param resource
 	 *            an InputStream to be analyzed
