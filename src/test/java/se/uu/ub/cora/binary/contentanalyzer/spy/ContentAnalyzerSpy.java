@@ -16,29 +16,17 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
+package se.uu.ub.cora.binary.contentanalyzer.spy;
 
-package se.uu.ub.cora.contentanalyzer;
+import java.io.InputStream;
 
-import static org.testng.Assert.assertEquals;
+import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+public class ContentAnalyzerSpy implements ContentAnalyzer {
 
-public class ContentAnalyzerExceptionTest {
-	@Test
-	public void testInit() {
-		ContentAnalyzerException conflict = ContentAnalyzerException.withMessage("message");
-
-		Assert.assertEquals(conflict.getMessage(), "message");
-	}
-
-	@Test
-	public void testInitWithException() {
-		Exception exception = new Exception();
-		ContentAnalyzerException conflict = ContentAnalyzerException
-				.withMessageAndException("message", exception);
-
-		assertEquals(conflict.getMessage(), "message");
-		assertEquals(conflict.getCause(), exception);
+	@Override
+	public String getMimeType(InputStream resource) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
