@@ -22,13 +22,13 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.binary.iiif.IiifImageParameters;
+import se.uu.ub.cora.binary.iiif.IiifParameters;
 
 public class IiifImageParametersTest {
 
 	@Test
 	public void testParameters() throws Exception {
-		IiifImageParameters record = new IiifImageParameters("someDataDivider", "someIdentifier",
+		IiifParameters record = new IiifParameters("someDataDivider", "someIdentifier",
 				"someRegion", "someSize", "someRotation", "someQuality", "someFormat");
 
 		assertEquals(record.dataDivider(), "someDataDivider");

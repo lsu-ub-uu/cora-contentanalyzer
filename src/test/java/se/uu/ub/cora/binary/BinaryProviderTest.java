@@ -32,9 +32,9 @@ import org.testng.annotations.Test;
 import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzerInstanceProvider;
 import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzerInstanceProviderSpy;
-import se.uu.ub.cora.binary.iiif.IiifImageAdapter;
-import se.uu.ub.cora.binary.iiif.IiifImageInstanceProvider;
-import se.uu.ub.cora.binary.iiif.spy.IiifImageInstanceProviderSpy;
+import se.uu.ub.cora.binary.iiif.IiifAdapter;
+import se.uu.ub.cora.binary.iiif.IiifInstanceProvider;
+import se.uu.ub.cora.binary.iiif.spy.IiifInstanceProviderSpy;
 import se.uu.ub.cora.initialize.ModuleInitializer;
 import se.uu.ub.cora.initialize.ModuleInitializerImp;
 import se.uu.ub.cora.initialize.spies.ModuleInitializerSpy;
@@ -46,7 +46,7 @@ public class BinaryProviderTest {
 	private LoggerFactory loggerFactory = new LoggerFactorySpy();
 	private ModuleInitializerSpy moduleInitializerSpy;
 	private ContentAnalyzerInstanceProviderSpy contentAnalyzerInstanceProvider;
-	private IiifImageInstanceProviderSpy iiifImageInstanceProvider;
+	private IiifInstanceProviderSpy iiifImageInstanceProvider;
 
 	@BeforeMethod
 	public void beforeMethod() {
@@ -65,7 +65,7 @@ public class BinaryProviderTest {
 
 	private void setupModuleInstanceProviderToReturnIiifImageInstanceProvider() {
 		moduleInitializerSpy = new ModuleInitializerSpy();
-		iiifImageInstanceProvider = new IiifImageInstanceProviderSpy();
+		iiifImageInstanceProvider = new IiifInstanceProviderSpy();
 		moduleInitializerSpy.MRV.setDefaultReturnValuesSupplier(
 				"loadOneImplementationBySelectOrder", () -> iiifImageInstanceProvider);
 		BinaryProvider.onlyForTestSetModuleInitializer(moduleInitializerSpy);
@@ -132,24 +132,24 @@ public class BinaryProviderTest {
 	}
 
 	@Test
-	public void testGetIiifImageAdapterUsesModuleInitializerToGetFactory() throws Exception {
+	public void testGetIiifAdapterUsesModuleInitializerToGetFactory() throws Exception {
 		setupModuleInstanceProviderToReturnIiifImageInstanceProvider();
 
-		IiifImageAdapter iiifImageAdapter = BinaryProvider.getIiifImageAdapter();
+		IiifAdapter iiifImageAdapter = BinaryProvider.getIiifAdapter();
 
 		moduleInitializerSpy.MCR.assertParameters("loadOneImplementationBySelectOrder", 0,
-				IiifImageInstanceProvider.class);
-		iiifImageInstanceProvider.MCR.assertReturn("getIiifImageAdapter", 0, iiifImageAdapter);
+				IiifInstanceProvider.class);
+		iiifImageInstanceProvider.MCR.assertReturn("getIiifAdapter", 0, iiifImageAdapter);
 	}
 
 	@Test
 	public void testOnlyForTestSetIiifImageAdapterInstanceProvider() throws Exception {
-		IiifImageInstanceProviderSpy iifImageInstanceProvider = new IiifImageInstanceProviderSpy();
+		IiifInstanceProviderSpy iifImageInstanceProvider = new IiifInstanceProviderSpy();
 		BinaryProvider.onlyForTestSetIiifImageAdapterInstanceProvider(iifImageInstanceProvider);
 
-		IiifImageAdapter iiifImageAdapter = BinaryProvider.getIiifImageAdapter();
+		IiifAdapter iiifImageAdapter = BinaryProvider.getIiifAdapter();
 
-		iifImageInstanceProvider.MCR.assertReturn("getIiifImageAdapter", 0, iiifImageAdapter);
+		iifImageInstanceProvider.MCR.assertReturn("getIiifAdapter", 0, iiifImageAdapter);
 	}
 
 	@Test
@@ -157,8 +157,8 @@ public class BinaryProviderTest {
 			throws Exception {
 		setupModuleInstanceProviderToReturnIiifImageInstanceProvider();
 
-		BinaryProvider.getIiifImageAdapter();
-		BinaryProvider.getIiifImageAdapter();
+		BinaryProvider.getIiifAdapter();
+		BinaryProvider.getIiifAdapter();
 
 		moduleInitializerSpy.MCR.assertNumberOfCallsToMethod("loadOneImplementationBySelectOrder",
 				1);

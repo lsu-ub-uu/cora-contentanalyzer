@@ -18,11 +18,19 @@
  */
 package se.uu.ub.cora.binary.iiif;
 
-import java.io.InputStream;
-import java.util.Map;
-import java.util.Optional;
+/**
+ * This interface is used to specify iiif image api for Cora. Please read further in link below.
+ * 
+ * @see <a href="https://iiif.io/api/image/3.0/">IIIF Image API</a>
+ */
+public interface IiifAdapter {
 
-public record IiifImageResponse(int status, Map<String, Object> headers,
-		Optional<InputStream> image, Optional<String> errorMessage) {
-
+	/**
+	 * 
+	 * @param method
+	 * @param headers
+	 * @param iiifParameters
+	 * @return
+	 */
+	IiifAdapterResponse callIiifServer(IiifParameters iiifParameters);
 }

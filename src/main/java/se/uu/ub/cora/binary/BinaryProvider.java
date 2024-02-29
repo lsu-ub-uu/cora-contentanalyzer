@@ -20,8 +20,8 @@ package se.uu.ub.cora.binary;
 
 import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzerInstanceProvider;
-import se.uu.ub.cora.binary.iiif.IiifImageAdapter;
-import se.uu.ub.cora.binary.iiif.IiifImageInstanceProvider;
+import se.uu.ub.cora.binary.iiif.IiifAdapter;
+import se.uu.ub.cora.binary.iiif.IiifInstanceProvider;
 import se.uu.ub.cora.initialize.AbstractProvider;
 import se.uu.ub.cora.initialize.SelectOrder;
 
@@ -33,7 +33,7 @@ import se.uu.ub.cora.initialize.SelectOrder;
  */
 public class BinaryProvider extends AbstractProvider {
 	private static ContentAnalyzerInstanceProvider analyzerInstanceProvider;
-	private static IiifImageInstanceProvider imageInstanceProvider;
+	private static IiifInstanceProvider imageInstanceProvider;
 
 	private BinaryProvider() {
 		// prevent call to constructor
@@ -80,37 +80,37 @@ public class BinaryProvider extends AbstractProvider {
 	}
 
 	/**
-	 * getIiifImageAdapter returns a IiifImageAdapter that can be used by anything that needs access
-	 * to Iiif Image API.
+	 * getIiifImageAdapter returns a IiifAdapter that can be used by anything that needs access to
+	 * Iiif Image API.
 	 * </p>
-	 * Code using the returned {@link IiifImageAdapter} instance MUST consider the returned instance
-	 * as NOT thread safe.
+	 * Code using the returned {@link IiifAdapter} instance MUST consider the returned instance as
+	 * NOT thread safe.
 	 * 
 	 * @return A IiifImageAdapter that gives access to IIIF Image Api
 	 */
-	public static IiifImageAdapter getIiifImageAdapter() {
+	public static IiifAdapter getIiifAdapter() {
 		if (imageInstanceProvider == null) {
 			imageInstanceProvider = moduleInitializer
-					.loadOneImplementationBySelectOrder(IiifImageInstanceProvider.class);
+					.loadOneImplementationBySelectOrder(IiifInstanceProvider.class);
 		}
-		return imageInstanceProvider.getIiifImageAdapter();
+		return imageInstanceProvider.getIiifAdapter();
 	}
 
 	/**
 	 * onlyForTestSetIiifImageAdapterInstanceProvider sets a IiifImageInstanceProvider that will be
-	 * used to return instances for the {@link #getIiifImageAdapter()} method. This possibility to
-	 * set a IiifImageInstanceProvider is provided to enable testing of getting a IiifImageAdapter
-	 * in other classes and is not intented to be used in production.
+	 * used to return instances for the {@link #getIiifAdapter()} method. This possibility to set a
+	 * IiifImageInstanceProvider is provided to enable testing of getting a IiifImageAdapter in
+	 * other classes and is not intented to be used in production.
 	 * <p>
 	 * The IiifImageInstanceProvider to use in production should be provided through an
-	 * implementation of {@link IiifImageInstanceProvider} in a seperate java module.
+	 * implementation of {@link IiifInstanceProvider} in a seperate java module.
 	 * 
 	 * @param instanceProvider
 	 *            A IiifImageInstanceProvider to use to return IiifImageAdapter instances for
 	 *            testing
 	 */
 	public static void onlyForTestSetIiifImageAdapterInstanceProvider(
-			IiifImageInstanceProvider imageInstanceProvider) {
+			IiifInstanceProvider imageInstanceProvider) {
 		BinaryProvider.imageInstanceProvider = imageInstanceProvider;
 	}
 

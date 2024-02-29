@@ -19,26 +19,26 @@
 
 package se.uu.ub.cora.binary.iiif.spy;
 
-import se.uu.ub.cora.binary.iiif.IiifImageAdapter;
-import se.uu.ub.cora.binary.iiif.IiifImageParameters;
-import se.uu.ub.cora.binary.iiif.IiifImageResponse;
+import se.uu.ub.cora.binary.iiif.IiifAdapter;
+import se.uu.ub.cora.binary.iiif.IiifParameters;
+import se.uu.ub.cora.binary.iiif.IiifAdapterResponse;
 import se.uu.ub.cora.testutils.mcr.MethodCallRecorder;
 import se.uu.ub.cora.testutils.mrv.MethodReturnValues;
 
-public class IiifImageAdapterSpy implements IiifImageAdapter {
+public class IiifAdapterSpy implements IiifAdapter {
 
 	public MethodCallRecorder MCR = new MethodCallRecorder();
 	public MethodReturnValues MRV = new MethodReturnValues();
 
-	public IiifImageAdapterSpy() {
+	public IiifAdapterSpy() {
 		MCR.useMRV(MRV);
 		MRV.setDefaultReturnValuesSupplier("requestImage", () -> 0);
-		MRV.setDefaultReturnValuesSupplier("getIiifImageAdapter", IiifImageAdapterSpy::new);
+		MRV.setDefaultReturnValuesSupplier("getIiifImageAdapter", IiifAdapterSpy::new);
 	}
 
 	@Override
-	public IiifImageResponse requestImage(IiifImageParameters iiifImageParameters) {
-		return (IiifImageResponse) MCR.addCallAndReturnFromMRV("iiifImageParameters",
+	public IiifAdapterResponse callIiifServer(IiifParameters iiifImageParameters) {
+		return (IiifAdapterResponse) MCR.addCallAndReturnFromMRV("iiifImageParameters",
 				iiifImageParameters);
 	}
 

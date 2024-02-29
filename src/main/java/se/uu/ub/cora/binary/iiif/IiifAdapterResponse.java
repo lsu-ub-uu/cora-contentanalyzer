@@ -18,7 +18,8 @@
  */
 package se.uu.ub.cora.binary.iiif;
 
-public record IiifImageParameters(String dataDivider, String identifier, String region, String size,
-		String rotation, String quality, String format) {
+import java.io.InputStream;
+import java.util.Map;
 
+public record IiifAdapterResponse(int status, Map<String, String> headers, InputStream body) {
 }

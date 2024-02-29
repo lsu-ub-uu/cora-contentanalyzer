@@ -26,7 +26,7 @@ import java.util.Optional;
 
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.binary.iiif.IiifImageResponse;
+import se.uu.ub.cora.binary.iiif.IiifAdapterResponse;
 
 public class IiifImageResponseTest {
 
@@ -35,7 +35,7 @@ public class IiifImageResponseTest {
 		ByteArrayInputStream image = new ByteArrayInputStream("someImage".getBytes());
 		Map<String, Object> headers = Map.of("someKey", "someValue");
 
-		IiifImageResponse record = new IiifImageResponse(200, headers, Optional.of(image),
+		IiifAdapterResponse record = new IiifAdapterResponse(200, headers, Optional.of(image),
 				Optional.of("someError"));
 
 		assertEquals(record.status(), 200);
