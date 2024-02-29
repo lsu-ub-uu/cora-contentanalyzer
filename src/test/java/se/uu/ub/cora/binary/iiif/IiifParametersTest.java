@@ -20,24 +20,20 @@ package se.uu.ub.cora.binary.iiif;
 
 import static org.testng.Assert.assertEquals;
 
+import java.util.Map;
+
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.binary.iiif.IiifParameters;
-
-public class IiifImageParametersTest {
+public class IiifParametersTest {
 
 	@Test
 	public void testParameters() throws Exception {
-		IiifParameters record = new IiifParameters("someDataDivider", "someIdentifier",
-				"someRegion", "someSize", "someRotation", "someQuality", "someFormat");
+		Map<String, String> headers = Map.of("headerKey", "headerValue");
 
-		assertEquals(record.dataDivider(), "someDataDivider");
-		assertEquals(record.identifier(), "someIdentifier");
-		assertEquals(record.region(), "someRegion");
-		assertEquals(record.size(), "someSize");
-		assertEquals(record.rotation(), "someRotation");
-		assertEquals(record.quality(), "someQuality");
-		assertEquals(record.format(), "someFormat");
+		IiifParameters record = new IiifParameters("someUri", "someMethod", headers);
+
+		assertEquals(record.uri(), "someUri");
+		assertEquals(record.method(), "someMethod");
+		assertEquals(record.headersMap(), headers);
 	}
-
 }
