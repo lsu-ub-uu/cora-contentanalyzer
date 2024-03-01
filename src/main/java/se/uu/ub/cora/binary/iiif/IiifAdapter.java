@@ -18,6 +18,8 @@
  */
 package se.uu.ub.cora.binary.iiif;
 
+import se.uu.ub.cora.binary.BinaryException;
+
 /**
  * This interface is used to specify iiif image api for Cora. Please read further in link below.
  * 
@@ -26,11 +28,16 @@ package se.uu.ub.cora.binary.iiif;
 public interface IiifAdapter {
 
 	/**
+	 * callIiifServer method must call iiifServer, forwarding the call parameters to the HTTP call.
+	 * The method, the headers and the iiif standard uri are provided in the iiifParameters record.
 	 * 
-	 * @param method
-	 * @param headers
 	 * @param iiifParameters
-	 * @return
+	 *            is a record that contains the http method, headers and the iiif uri to be use on
+	 *            the call to iiifServer.
+	 * @return IiifAdapterResponse containg the status, the headers and the body of the response.
+	 * 
+	 * @throws BinaryException
+	 *             if any problem occurs while communicating with http.
 	 */
 	IiifAdapterResponse callIiifServer(IiifParameters iiifParameters);
 }
