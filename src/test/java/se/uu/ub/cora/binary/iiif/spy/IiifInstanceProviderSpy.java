@@ -18,20 +18,20 @@
  */
 package se.uu.ub.cora.binary.iiif.spy;
 
-import se.uu.ub.cora.binary.iiif.IiifImageAdapter;
-import se.uu.ub.cora.binary.iiif.IiifImageInstanceProvider;
+import se.uu.ub.cora.binary.iiif.IiifAdapter;
+import se.uu.ub.cora.binary.iiif.IiifInstanceProvider;
 import se.uu.ub.cora.testutils.mcr.MethodCallRecorder;
 import se.uu.ub.cora.testutils.mrv.MethodReturnValues;
 
-public class IiifImageInstanceProviderSpy implements IiifImageInstanceProvider {
+public class IiifInstanceProviderSpy implements IiifInstanceProvider {
 
 	public MethodCallRecorder MCR = new MethodCallRecorder();
 	public MethodReturnValues MRV = new MethodReturnValues();
 
-	public IiifImageInstanceProviderSpy() {
+	public IiifInstanceProviderSpy() {
 		MCR.useMRV(MRV);
 		MRV.setDefaultReturnValuesSupplier("getOrderToSelectImplementionsBy", () -> 0);
-		MRV.setDefaultReturnValuesSupplier("getIiifImageAdapter", IiifImageAdapterSpy::new);
+		MRV.setDefaultReturnValuesSupplier("getIiifAdapter", IiifAdapterSpy::new);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class IiifImageInstanceProviderSpy implements IiifImageInstanceProvider {
 	}
 
 	@Override
-	public IiifImageAdapter getIiifImageAdapter() {
-		return (IiifImageAdapter) MCR.addCallAndReturnFromMRV();
+	public IiifAdapter getIiifAdapter() {
+		return (IiifAdapter) MCR.addCallAndReturnFromMRV();
 	}
 
 }

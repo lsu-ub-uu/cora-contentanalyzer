@@ -22,26 +22,21 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.util.Map;
-import java.util.Optional;
 
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.binary.iiif.IiifImageResponse;
-
-public class IiifImageResponseTest {
+public class IiifAdapterResponseTest {
 
 	@Test
 	public void testIiifImageResponse() throws Exception {
-		ByteArrayInputStream image = new ByteArrayInputStream("someImage".getBytes());
-		Map<String, Object> headers = Map.of("someKey", "someValue");
+		Map<String, String> headers = Map.of("someKey", "someValue");
+		ByteArrayInputStream inputStream = new ByteArrayInputStream("someString".getBytes());
 
-		IiifImageResponse record = new IiifImageResponse(200, headers, Optional.of(image),
-				Optional.of("someError"));
+		IiifAdapterResponse record = new IiifAdapterResponse(200, headers, inputStream);
 
 		assertEquals(record.status(), 200);
 		assertEquals(record.headers(), headers);
-		assertEquals(record.image().get(), image);
-		assertEquals(record.errorMessage().get(), "someError");
+		assertEquals(record.body(), inputStream);
 	}
 
 }

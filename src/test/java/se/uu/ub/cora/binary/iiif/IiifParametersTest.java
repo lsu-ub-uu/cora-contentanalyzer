@@ -18,7 +18,22 @@
  */
 package se.uu.ub.cora.binary.iiif;
 
-public record IiifImageParameters(String dataDivider, String identifier, String region, String size,
-		String rotation, String quality, String format) {
+import static org.testng.Assert.assertEquals;
 
+import java.util.Map;
+
+import org.testng.annotations.Test;
+
+public class IiifParametersTest {
+
+	@Test
+	public void testParameters() throws Exception {
+		Map<String, String> headers = Map.of("headerKey", "headerValue");
+
+		IiifParameters record = new IiifParameters("someUri", "someMethod", headers);
+
+		assertEquals(record.uri(), "someUri");
+		assertEquals(record.method(), "someMethod");
+		assertEquals(record.headersMap(), headers);
+	}
 }

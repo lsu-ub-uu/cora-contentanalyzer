@@ -20,9 +20,6 @@ package se.uu.ub.cora.binary.iiif;
 
 import java.io.InputStream;
 import java.util.Map;
-import java.util.Optional;
 
-public record IiifImageResponse(int status, Map<String, Object> headers,
-		Optional<InputStream> image, Optional<String> errorMessage) {
-
+public record IiifAdapterResponse(int status, Map<String, String> headers, InputStream body) {
 }

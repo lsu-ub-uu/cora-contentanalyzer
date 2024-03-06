@@ -19,24 +19,23 @@
 
 package se.uu.ub.cora.binary.iiif;
 
-import se.uu.ub.cora.binary.contentanalyzer.ContentAnalyzer;
 import se.uu.ub.cora.initialize.SelectOrder;
 
 /**
- * ContentAnalyzerInstanceProvider is used to provide Content Analyzers for binaries
+ * IiifImageInstanceProvider is used to provide IIIF for binaries
  */
-public interface IiifImageInstanceProvider extends SelectOrder {
+public interface IiifInstanceProvider extends SelectOrder {
 
 	/**
-	 * getContentAnalyzer should be implemented in such a way that it returns a
-	 * {@link ContentAnalyzer} that can be used by anything that needs access to analyzing content.
-	 * Multiple calls to getContentAnalyzer should return instances or the same instance, depending
-	 * on the implementation. It must be possible to use the currently returned instance without
-	 * considering if other calls has been made to this method.
+	 * getIiifAdapter should be implemented in such a way that it returns a {@link IiifAdapter} that
+	 * can be used by anything that needs access to iiif. Multiple calls to getIiifAdapter should
+	 * return instances or the same instance, depending on the implementation. It must be possible
+	 * to use the currently returned instance without considering if other calls has been made to
+	 * this method.
 	 * 
-	 * @return A {@link ContentAnalyzer} that gives access to content analyzer for binaries
+	 * @return A {@link IiifAdapter} that gives access to iiif
 	 */
 
-	IiifImageAdapter getIiifImageAdapter();
+	IiifAdapter getIiifAdapter();
 
 }
