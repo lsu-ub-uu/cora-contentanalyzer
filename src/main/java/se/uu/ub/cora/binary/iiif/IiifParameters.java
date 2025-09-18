@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Uppsala University Library
+ * Copyright 2024, 2025 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -20,5 +20,6 @@ package se.uu.ub.cora.binary.iiif;
 
 import java.util.Map;
 
-public record IiifParameters(String uri, String method, Map<String, String> headersMap) {
+public record IiifParameters(String dataDivider, String type, String id, String representation,
+		String uri, String method, Map<String, String> headersMap) {
 }
