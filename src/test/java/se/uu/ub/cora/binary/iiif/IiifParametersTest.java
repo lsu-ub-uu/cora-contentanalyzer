@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Uppsala University Library
+ * Copyright 2024, 2025 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -27,13 +27,18 @@ import org.testng.annotations.Test;
 public class IiifParametersTest {
 
 	@Test
-	public void testParameters() throws Exception {
+	public void testParameters() {
 		Map<String, String> headers = Map.of("headerKey", "headerValue");
 
-		IiifParameters record = new IiifParameters("someUri", "someMethod", headers);
+		IiifParameters parameters = new IiifParameters("someDataDivider", "someType", "someId",
+				"someRepresentation", "someUri", "someMethod", headers);
 
-		assertEquals(record.uri(), "someUri");
-		assertEquals(record.method(), "someMethod");
-		assertEquals(record.headersMap(), headers);
+		assertEquals(parameters.dataDivider(), "someDataDivider");
+		assertEquals(parameters.type(), "someType");
+		assertEquals(parameters.id(), "someId");
+		assertEquals(parameters.representation(), "someRepresentation");
+		assertEquals(parameters.uri(), "someUri");
+		assertEquals(parameters.method(), "someMethod");
+		assertEquals(parameters.headersMap(), headers);
 	}
 }
